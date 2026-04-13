@@ -68,6 +68,7 @@ Building the Data Warehouse (Data Engineering)
 
 
 Objective
+----------
 
 
 
@@ -76,6 +77,7 @@ Develop a modern data warehouse using SQL Server to consolidate sales data, enab
 
 
 Specifications
+--------------
 
 
 Data Sources: Import data from two source systems (ERP and CRM) provided as CSV files.
@@ -101,15 +103,18 @@ BI: Analytics & Reporting (Data Analysis)
 
 
 Objective
+---------
 
 
 Develop SQL-based analytics to deliver detailed insights into:
 
-Customer Behavior
+. Customer Behavior
 
-Product Performance
+. Product Performance
 
-Sales Trends
+, Sales Trends
+
+
 
 These insights empower stakeholders with key business metrics, enabling strategic decision-making.
 
@@ -120,30 +125,4 @@ These insights empower stakeholders with key business metrics, enabling strategi
 ----------------------------------------------------------------------------
 
 
-data-warehouse-project/
-
-│
-├── datasets/                           # Raw datasets used for the project (ERP and CRM data)
-|
-│
-├── docs/                               # Project documentation and architecture details
-|
-|
-│   ├── etl.drawio                      # Draw.io file shows all different techniquies and methods of ETL
-│   ├── data_architecture.drawio        # Draw.io file shows the project's architecture
-│   ├── data_catalog.md                 # Catalog of datasets, including field descriptions and metadata
-│   ├── data_flow.drawio                # Draw.io file for the data flow diagram
-│   ├── data_models.drawio              # Draw.io file for data models (star schema)
-│   ├── naming-conventions.md           # Consistent naming guidelines for tables, columns, and files
-│
-├── scripts/                            # SQL scripts for ETL and transformations
-│   ├── bronze/                         # Scripts for extracting and loading raw data
-│   ├── silver/                         # Scripts for cleaning and transforming data
-│   ├── gold/                           # Scripts for creating analytical models
-│
-├── tests/                              # Test scripts and quality files
-│
-├── README.md                           # Project overview and instructions
-├── LICENSE                             # License information for the repository
-├── .gitignore                          # Files and directories to be ignored by Git
-└── requirements.txt                    # Dependencies and requirements for the project
+<img width="801" height="505" alt="Screenshot 2026-04-13 at 1 03 09 PM" src="https://github.com/user-attachments/assets/7c916ce1-8341-40d1-96cb-da73bc86dc6b" />
