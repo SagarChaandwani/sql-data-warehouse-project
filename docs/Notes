@@ -1,1 +1,383 @@
+========================================================================
+                                        SQL project: Data Warehousing
+========================================================================
+
+========================================================================
+                                   In this we focus on Organize,Structure,Prepare
+========================================================================
+
+Data Warehousing 
+BILL INMON is the father of data warehouse.
+
+
+
+Subject oriented - That means that the warehouse is always focused on a business area like sales,customers, finance and so on .
+Integrated - means it goes and integrates multiple source systems usually you build a warehouse not only for one source but for multiple sources.
+
+Time variant - You can keep the historical data inside data warehouse .
+
+Non volatile - Once the data enter data warehouse it is not deleted or modified .
+
+========================================================
+
+
+
+
+=========================================================
+
+
+=========================================================
+
+
+=========================================================
+                                                   ETL
+=========================================================
+
+
+
+
+Sources - 
+
+CBS (CORE BANKING SYSTEM)
+Snowflake (cloud data sharing )
+Argus SFTP(Secure file transfer protocol)
+Aws s3 (cloud data sharing )
+Azure Blob Storage(cloud data sharing )
+The Argus API Cloud 
+ Argus Direct (Excel or csv)
+(Data store in Data lake or a big data warehouse)
+Oracle (in this company's case) is the Source Database 
+The "Input" Store: Where their reporters and analysts type in price assessments. This is usually a highly secure, transactional relational database (like Oracle or PostgreSQL).
+The "History" Store: They have decades of data. This is often stored in a Data Lake or a Big Data warehouse (like Snowflake or BigQuery) because it contains millions of rows of historical price points.
+The "Cache" Store: For real-time news and "tickers," they use in-memory storage (like Redis) so that the news hits your screen the second an analyst hits "publish."
+—----------------------------------------------------------------------------------------------
+Extract - In this we identify data that we need, we pull it out and we don't change anything . It's going to be like a source system so the extract has one like a source system, so the extract has only one task to identify the data you have to pull out from the source and to not change anything, so we do not manipulate the data at all , it can stay as it is.
+
+Transform - We will take this extracted data  and we are going to change the shape of the data and this process is really heavy work. We can do alot of stuff like ‘’ cleaning , data integration and formatting , normalization.
+
+
+Load - In this we will take new data and we are going to insert it into targets . That means we going to take this prepared data from transformation step and move it into final destination ‘ data warehouse.
+==================================================================================================================
+
+=========================================================
+                                        Data Architecture ETL
+                                             EXTRACTION
+=========================================================
+
+—-------------------------------------------------------------------------------------------------
+                                               Transformation
+
+
+—----------------------------------------------------------------------------------------------
+                                                  LOAD
+
+
+
+
+
+
+
+
+================================================
+In this Project i am doing Pull Extraction, full extraction,
+File parsing .
+Complete transformation.
+Batch Processing ,Full load, Truncate and insert,scd1
+================================================
+
+
+
+
+=========================================================
+
+
+=========================================================
+
+
+Design Data Architecture 
+
+1.Choose data management approach 
+
+We choose a data warehouse using medallion architecture.
+
+
+
+
+
+========================================================================
+2. Design the layer
+
+
+
+PRINCIPLE 
+Always focus on SOC (Separation of concerns)
+
+You have to make shure to break down complex system into smaller parts 
+Component of your architecture cant be duplicated 
+Don't mix everything
+
+
+
+
+
+========================================================================
+
+
+
+
+=========================================================
+
+
+For meta deta columns we use dwh_(then column name)
+
+
+
+
+=========================================================
+                                       Creating DataWarehouse
+=========================================================
+
+
+USE master;
+GO
+
+-- Drop and recreate the 'DataWarehouse' database
+IF EXISTS (SELECT 1 FROM sys.databases WHERE name = 'DataWarehouse')
+BEGIN
+    ALTER DATABASE DataWarehouse SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+    DROP DATABASE DataWarehouse;
+END;
+GO
+  
+-- Create the Database 'DataWarehouse'
+
+CREATE DATABASE DataWarehouse;
+GO
+
+USE DataWarehouse;
+GO
+
+-- CREATE Schemas
+  
+CREATE SCHEMA bronze;
+GO
+  
+CREATE SCHEMA silver;
+GO
+  
+CREATE SCHEMA gold;
+GO
+
+=========================================================
+                                               Bronze Layer
+=========================================================
+
+
+
+Asking the right question will help you to design correct scripts in order to extract data and to avoid a lot of mistakes and challenges.
+========================================================================
+
+Most common question to ask 
+
+========================================================================
+
+We start by understanding the business context and the ownership
+And would like to understand the story behind the data
+
+— Who owns the data?
+(who is responsible for the data, which it departments and so on)
+— What business process does it supports?
+(like customer transactions, supply chain logistics or may be finance reporting) With that you understand the importance of data.
+— System and data documentation?
+(having system documentation from the source is about learning materials about your data and it going to save a lot of time later when you are working or designing new data models 
+—- Data model and data catalog
+Description of the columns and the tables its going to be nice to have data catalog thios can help you alot in data warehouse , how you going to join the tables together.
+So with that you find solid foundations about business context, processes and ownership of data
+
+
+=========================================================
+DDL(Data Definition Language defines the structure of database tables.
+=========================================================
+Data Profiling 
+
+Explore the data to identify column names and data types.
+=========================================================
+
+While Inserting data into bronze layer , after bulk insert do quality check 
+Check that the data has not shifter and is in the correct columns.
+=========================================================
+Add Prints to track execution,debug issues and understand its flow.
+=========================================================
+TRY CATCH : Ensures error handling, data integrity, and issue logging for easier debugging.
+=========================================================
+
+In git i have added all ddl scripts and Bulk Insert script for bronze layer
+=========================================================
+
+
+                                         Silver Layer
+
+
+=========================================================
+
+
+
+
+=========================================================
+
+
+
+
+=========================================================
+
+Check for nulls / duplicates, trim , data standardization/normalization/ consistency 
+
+
+TRIM
+
+
+
+Data standardization/ consistency/ normalization
+
+
+
+
+n/a
+
+
+
+
+nulls / duplicates,
+
+
+
+
+
+
+After transforming data insert into silver layer 
+
+After inserting all above queries that you use for checking nulls , duplicates  run again on silver tables 
+
+Result should be null .
+
+Repeat this we all 5 tables 
+
+
+=======================================================
+
+Substring () Extracts a specific part of a string value 
+
+That means divided column into two columns
+
+
+======================================================
+
+ISNULL () 
+
+Replaces Null values with a specified replacement value
+
+That mean ISNULL REPLACES WITH O 
+
+For ex - ISNULL(prd_cost,0) AS prd_cost,
+
+
+======================================================
+
+CHECK FOR INVALID DATES
+
+
+
+
+
+LEAD(prd_start_dt) OVER (PARTITION BY prd_key ORDER BY prd_start_dt)-1 AS prd_end_dt
+=============================================================
+
+WHEN IT SHOWS DATE AND TIME TOGETHER AND TIME IS 00:00:00
+
+THEN WE USE CAST 
+
+CAST(LEAD(prd_start_dt) OVER (PARTITION BY prd_key ORDER BY prd_start_dt)-1 AS DATE) AS prd_end_dt
+
+
+
+
+
+
+
+—----------------------------------------------------------------------------------------------
+
+When we change integers to dates we have to be very careful
+
+
+
+CASE
+    WHEN sls_order_dt = 0 OR LEN(sls_order_dt) != 8 THEN NULL
+    ELSE CAST(CAST(sls_order_dt AS VARCHAR)AS DATE)
+END AS sls_order_dt,
+
+You cant cast integer to date directly 
+First cast into varchar then date 
+
+—------------------------------------------------------------------------------------------------
+
+
+
+CASE
+    WHEN sls_order_dt = 0 OR LEN(sls_order_dt) != 8 THEN NULL
+    ELSE CAST(CAST(sls_order_dt AS VARCHAR)AS DATE)
+END AS sls_order_dt,
+CASE
+    WHEN sls_ship_dt = 0 OR LEN(sls_ship_dt) != 8 THEN NULL
+    ELSE CAST(CAST(sls_ship_dt AS VARCHAR)AS DATE)
+END AS sls_ship_dt,
+CASE
+    WHEN sls_due_dt = 0 OR LEN(sls_due_dt) != 8 THEN NULL
+    ELSE CAST(CAST(sls_due_dt AS VARCHAR)AS DATE)
+END AS sls_due_dt,
+CASE 
+    WHEN sls_sales != sls_quantity * ABS(sls_price) OR sls_sales IS NULL OR sls_sales <= 0
+    THEN sls_quantity * ABS(sls_price)
+    ELSE sls_sales
+END AS sls_sales,
+sls_quantity,
+CASE 
+    WHEN sls_price IS NULL OR sls_price <= 0 OR  sls_price != sls_sales /  NULLIF(sls_quantity,0) 
+    THEN  sls_sales / NULLIF(sls_quantity,0) 
+    ELSE sls_price
+
+
+
+
+
+
+===========================================================================================================================================================================
+                                               GOLD LAYER
+
+
+
+
+
+—-------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
