@@ -45,7 +45,7 @@ This project involves:
 
 
 
-🎯 This repository is an excellent resource for professionals and students looking to showcase expertise in:
+🎯 This repository showcase expertise in:
 
 
 
@@ -131,3 +131,16 @@ These insights empower stakeholders with key business metrics, enabling strategi
 
 <img width="793" height="421" alt="Screenshot 2026-04-13 at 2 15 34 PM" src="https://github.com/user-attachments/assets/222722c8-c15d-4698-8b78-cb00eeb2c293" />
 
+
+
+
+🌟 About Me
+-
+
+Hi, I'm Sagar Chaandwani, a Data Professional specializing in end-to-end data engineering and analytics solutions.
+
+In this project, I architected a modern Data Warehouse from the ground up. I focused on building a robust ETL pipeline using the Medallion Architecture (Bronze, Silver, Gold) to transform messy, fragmented source data into a clean, business-ready Star Schema.
+
+My goal is to bridge the gap between raw data and strategic decision-making through clean code and scalable architecture.
+
+📫 Connect with me: [LinkedIn] | [Github]
