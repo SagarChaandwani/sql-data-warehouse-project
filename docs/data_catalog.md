@@ -13,13 +13,10 @@ Purpose: Stores customer details enriched with demographic and geographic data.
 
 Columns:
 -
-Column Name	                       Data Type	                                Description
--
-customer_key	                        INT	             Surrogate key uniquely identifying each customer record in the dimension table.
-
-customer_id	                          INT	             Unique numerical identifier assigned to each customer.
 
 
+
+<img width="954" height="418" alt="Screenshot 2026-04-13 at 1 30 06 PM" src="https://github.com/user-attachments/assets/4be59e25-aa4c-46b0-9ad6-9d52c5cc5013" />
 
 customer_number	NVARCHAR(50)	Alphanumeric identifier representing the customer, used for tracking and referencing.
 first_name	NVARCHAR(50)	The customer's first name, as recorded in the system.
