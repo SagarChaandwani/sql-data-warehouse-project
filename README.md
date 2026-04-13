@@ -143,4 +143,4 @@ In this project, I architected a modern Data Warehouse from the ground up. I foc
 
 My goal is to bridge the gap between raw data and strategic decision-making through clean code and scalable architecture.
 
-📫 Connect with me: [[LinkedIn](https://www.linkedin.com/in/sagarchaandwani/)] | [Githubhttps://github.com/SagarChaandwani]
+📫 Connect with me: [[LinkedIn](https://www.linkedin.com/in/sagarchaandwani/)] | [https://github.com/SagarChaandwani]
