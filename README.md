@@ -129,4 +129,5 @@ These insights empower stakeholders with key business metrics, enabling strategi
 ----------------------------------------------------------------------------
 
 
-<img width="801" height="505" alt="Screenshot 2026-04-13 at 1 03 09 PM" src="https://github.com/user-attachments/assets/7c916ce1-8341-40d1-96cb-da73bc86dc6b" />
+<img width="793" height="421" alt="Screenshot 2026-04-13 at 2 15 34 PM" src="https://github.com/user-attachments/assets/222722c8-c15d-4698-8b78-cb00eeb2c293" />
+
