@@ -47,9 +47,9 @@ cst_create_date)
 SELECT 
 cst_id,
 cst_key,
-TRIM(cst_firstname) AS cst_firstname,
+TRIM(cst_firstname) AS cst_firstname,-- to clean text fields
 TRIM(cst_lastname)AS cst_lastname,
-CASE WHEN UPPER(TRIM(cst_marital_status)) = 'M' THEN 'Married'
+CASE WHEN UPPER(TRIM(cst_marital_status)) = 'M' THEN 'Married'-- to standardize 
      WHEN UPPER(TRIM(cst_marital_status)) = 'S' THEN 'Single'
 ELSE 'n/a' 
 END AS cst_material_status,
