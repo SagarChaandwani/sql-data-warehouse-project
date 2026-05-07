@@ -52,7 +52,7 @@ TRIM(cst_lastname)AS cst_lastname,
 CASE WHEN UPPER(TRIM(cst_marital_status)) = 'M' THEN 'Married'-- to standardize 
      WHEN UPPER(TRIM(cst_marital_status)) = 'S' THEN 'Single'
 ELSE 'n/a' 
-END AS cst_marial_status,
+END AS cst_marital_status,
 CASE WHEN UPPER(TRIM(cst_gndr)) = 'F' THEN 'Female'
      WHEN UPPER(TRIM(cst_gndr)) = 'M' THEN 'Male'
 ELSE 'n/a' 
